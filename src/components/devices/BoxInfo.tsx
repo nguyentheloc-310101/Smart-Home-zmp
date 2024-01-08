@@ -4,8 +4,10 @@ interface BoxDeviceProps {
   name: string;
   image: string;
   state?: any;
+  value: any;
+  type: string;
 }
-const BoxInfo = ({ name, image }: BoxDeviceProps) => {
+const BoxInfo = ({ name, image, value, type }: BoxDeviceProps) => {
   return (
     <Box className="w-full box-device p-[24px] overflow-hidden h-fit flex flex-col gap-[24px]">
       <Box className="flex items-center justify-between">
@@ -28,17 +30,12 @@ const BoxInfo = ({ name, image }: BoxDeviceProps) => {
         <div className="flex gap-[12px]">
           <ItemsInfo
             icon={
-              'https://ucarecdn.com/83a0839e-f29f-4724-a717-8a1ee3049146/-/preview/500x500/-/quality/smart_retina/-/format/auto/'
+              type == 'temperature'
+                ? 'https://ucarecdn.com/83a0839e-f29f-4724-a717-8a1ee3049146/-/preview/500x500/-/quality/smart_retina/-/format/auto/'
+                : 'https://ucarecdn.com/e1e327de-bd6f-4fb7-a558-ce4d0fee3f88/-/preview/500x500/-/quality/smart_retina/-/format/auto/'
             }
-            value={12}
-            type={'temperature'}
-          />
-          <ItemsInfo
-            icon={
-              'https://ucarecdn.com/e1e327de-bd6f-4fb7-a558-ce4d0fee3f88/-/preview/500x500/-/quality/smart_retina/-/format/auto/'
-            }
-            value={22}
-            type={'humidity'}
+            value={value ? value : 0}
+            type={type}
           />
         </div>
         <div className="bg-[#F7F7F9] py-[8px] px-[16px] text-[#9A9B9E] font-[700] text-[10px] leading-[14px] rounded-[32px]">
@@ -65,7 +62,7 @@ const ItemsInfo = ({ icon, value, type }: ItemsInfoProps) => {
           src={icon}
         />
         <Box>
-          <div className="text-[#75A7F7] font-[700] text-[15px] leading-[22px]">
+          <div className="text-[#75A7F7] font-[700] text-[30px] leading-[22px]">
             {value}{' '}
             {type == 'temperature' ? (
               <span>&deg;C</span>
